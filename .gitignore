@@ -1,0 +1,11 @@
+# nextjs build files
+.next/
+
+# nodejs module
+node_modules/
+
+# vscode config
+.vscode/
+
+# jetbrains config
+.idea/

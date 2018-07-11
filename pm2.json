@@ -1,0 +1,13 @@
+{
+  "apps": [
+    {
+      "name": "mobile",
+      "script": "npm",
+      "watch": true,
+      "instances": 2,
+      "exec_mode": "cluster",
+      "args": "run start",
+      "max_memory_restart": "120M"
+    }
+  ]
+}
