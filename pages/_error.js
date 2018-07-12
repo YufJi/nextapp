@@ -10,13 +10,12 @@ const errMap = {
 };
 
 export default class extends React.Component {
+  static propTypes = {
+    statusCode: PropTypes.number.isRequired,
+  }
   static getInitialProps({ res, err }) {
     const statusCode = err ? err.statusCode : res ? res.statusCode : 0;
     return { statusCode };
-  }
-
-  static propTypes = {
-    statusCode: PropTypes.number.isRequired,
   }
 
   render() {

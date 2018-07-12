@@ -5,28 +5,30 @@ import { bindActionCreators } from 'redux';
 import { Toast, Card, WhiteSpace } from 'antd-mobile';
 import { initStore } from '../redux/store';
 import withDPR from '../hocs/withDPR';
-import { fetchShopData } from '../redux/actions/shop';
+import { fetchListData } from '../redux/actions/shop';
 
 @withDPR
 class ShopProfile extends Component {
-  static async getInitialProps({ query, store }) {
-    // 发起请求
-    await store.dispatch(fetchShopData());
-    return {};
-  }
-
   static propTypes = {
     profile: PropTypes.object.isRequired,
     url: PropTypes.object.isRequired,
     fetchData: PropTypes.func.isRequired,
   }
-  log = () => {
-    Toast.loading('接口请求...', 90);
-    console.log(this.props.list);
+
+  static async getInitialProps({ query, store }) {
+    // 发起请求
+    await store.dispatch(fetchListData());
+    return {};
+  }
+
+
+  log = async () => {
+    Toast.loading('接口请求...', 0);
+    await this.props.fetchData();
+    Toast.hide();
   }
   render() {
     const { profile, url } = this.props;
-    const { exception_task = [] } = profile;
     return (
       <div onClick={this.log}>
         <Card full>
@@ -57,7 +59,7 @@ const mapStateToProps = ({ shop }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: bindActionCreators(fetchShopData, dispatch),
+    fetchData: bindActionCreators(fetchListData, dispatch),
   };
 };
 
