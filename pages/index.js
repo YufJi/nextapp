@@ -1,8 +1,10 @@
+import Head from 'next/head';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
 import { bindActionCreators } from 'redux';
-import { Toast, Card, WhiteSpace } from 'antd-mobile';
+import { Toast, Card, Carousel } from 'antd-mobile';
+
 import { initStore } from '../redux/store';
 import withDPR from '../hocs/withDPR';
 import { fetchListData } from '../redux/actions/shop';
@@ -15,22 +17,49 @@ class ShopProfile extends Component {
     fetchData: PropTypes.func.isRequired,
   }
 
+
   static async getInitialProps({ query, store }) {
     // 发起请求
     await store.dispatch(fetchListData());
-    return {};
+    return {
+      data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
+      imgHeight: 176,
+    };
   }
-
 
   log = async () => {
     Toast.loading('接口请求...', 0);
     await this.props.fetchData();
     Toast.hide();
   }
+
   render() {
-    const { profile, url } = this.props;
+    const { profile, url, data, imgHeight } = this.props;
     return (
       <div onClick={this.log}>
+        <Head>
+          <title>next.js app</title>
+        </Head>
+        <Carousel
+          autoplay={false}
+          infinite
+          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+          afterChange={index => console.log('slide to', index)}
+        >
+          {data.map(val => (
+            <a
+              key={val}
+              href="http://www.alipay.com"
+              style={{ display: 'inline-block', width: '100%', height: imgHeight }}
+            >
+              <img
+                src={`https://zos.alipayobjects.com/rmsportal/${val}.png`}
+                alt=""
+                style={{ width: '100%' }}
+              />
+            </a>
+          ))}
+        </Carousel>
         <Card full>
           <Card.Header
             title="This is title"

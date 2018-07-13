@@ -2,7 +2,6 @@ import 'isomorphic-fetch';
 import { Toast } from 'antd-mobile';
 import { prefix } from '../env.config';
 
-
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) return response;
   const error = new Error(response.statusText);
