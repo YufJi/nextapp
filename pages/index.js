@@ -36,7 +36,7 @@ class ShopProfile extends Component {
   render() {
     const { profile, url, data, imgHeight } = this.props;
     return (
-      <div onClick={this.log}>
+      <div>
         <Head>
           <title>next.js app</title>
         </Head>
@@ -60,7 +60,7 @@ class ShopProfile extends Component {
             </a>
           ))}
         </Carousel>
-        <Card full>
+        <Card full onClick={this.log}>
           <Card.Header
             title="This is title"
             thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"

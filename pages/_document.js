@@ -1,14 +1,18 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import './antd-theme.less';
+import '../style/antd-theme.less';
 
 export default class extends Document {
   render() {
     return (
-      <html lang="zh-CN" data-scale="true">
+      <html lang="zh-CN">
         <Head>
           <meta content="telephone=no" name="format-detection" />
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+          <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="full-screen" content="yes" />
+          <meta name="x5-fullscreen" content="true" />
+
           <link rel="stylesheet" href="/_next/static/style.css" />
           <script src="/static/hd.min.js" />
           <script src="/static/fastclick.min.js" />
