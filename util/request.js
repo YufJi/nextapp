@@ -1,5 +1,4 @@
 import 'isomorphic-fetch';
-import { Toast } from 'antd-mobile';
 import { prefix } from '../env.config';
 
 function checkStatus(response) {
@@ -22,10 +21,6 @@ function valideData(data) {
   }
 }
 
-function catchErr(err) {
-  const { errMsg } = err;
-  Toast.fail(errMsg);
-}
 /**
  * Requests a URL, returning a promise.
  *
@@ -37,6 +32,5 @@ export default function request(url, options) {
   return fetch(prefix + url, options)
     .then(checkStatus)
     .then(parseJSON)
-    .then(valideData)
-    .catch(catchErr);
+    .then(valideData);
 }

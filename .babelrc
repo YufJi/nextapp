@@ -1,15 +1,10 @@
 {
   "presets": [
-    ["next/babel", {
-      "preset-env": {},
-      "transform-runtime": {},
-      "styled-jsx": {},
-      "class-properties": {}
-    }]
+    ["next/babel"]
   ],
   "plugins": [
-    ["import", { "libraryName": "antd-mobile" }],
     ["transform-assets-import-to-string", { "baseDir": "static", "baseUri": "/" }],
-    "transform-decorators-legacy",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
   ]
 }
