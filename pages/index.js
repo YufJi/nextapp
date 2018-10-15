@@ -2,38 +2,41 @@ import Head from 'next/head';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import style from '../style/index.scss';
 
-@withDPR
 class Index extends Component {
-  static propTypes = {
-    profile: PropTypes.object.isRequired,
-    url: PropTypes.object.isRequired,
-    fetchData: PropTypes.func.isRequired,
-  }
-
   static async getInitialProps({ query, store }) {
     // 发起请求
-    await store.dispatch(fetchListData());
-    return {
-
-    };
+    // await store.dispatch(fetchListData());
+    return {};
   }
 
-  log = async () => {
-    Toast.loading('接口请求...', 0);
-    await this.props.fetchData();
-    Toast.hide();
+  onChange = (e) => {
+    console.log(e.target.value);
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'global/onInput',
+      payload: e.target.value,
+    });
   }
 
   render() {
-    const { profile, url, data, imgHeight } = this.props;
-    return ([
-      <div key="dom">
-        <div className={style.a}>sdfa</div>
-      </div>,
-    ]);
+    console.log(this.props, 'props');
+    const { name } = this.props;
+    return (
+      <div>
+        <div>
+          <input type="text" value={name} placeholder="12313" onInput={e => this.onChange(e)} />
+        </div>
+      </div>
+    );
   }
 }
 
-export default Index;
+const mapStateToProps = ({ global }) => {
+  return { ...global };
+};
+
+export default connect(mapStateToProps)(Index);
